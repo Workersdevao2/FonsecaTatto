@@ -369,17 +369,43 @@
     }
 
     .service-card {
+      position: relative;
       background: var(--bg-card);
+      background-size: cover;
+      background-position: center;
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 28px 24px;
+      min-height: 220px;
       transition: all 0.3s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10,10,12,0.35) 0%, rgba(10,10,12,0.88) 65%, rgba(10,10,12,0.95) 100%);
+      z-index: 0;
+      transition: background 0.3s;
     }
 
     .service-card:hover {
       border-color: var(--accent);
       transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+    }
+
+    .service-card:hover::before {
+      background: linear-gradient(180deg, rgba(10,10,12,0.25) 0%, rgba(10,10,12,0.8) 60%, rgba(10,10,12,0.92) 100%);
+    }
+
+    .service-card > * {
+      position: relative;
+      z-index: 1;
     }
 
     .service-icon {
@@ -391,12 +417,21 @@
     .service-card h3 {
       font-size: 1.15rem;
       margin-bottom: 10px;
+      color: #fff;
     }
 
     .service-card p {
       font-size: 0.9rem;
-      color: var(--text-muted);
+      color: rgba(240,240,242,0.85);
     }
+
+    /* Individual service backgrounds – place matching images in /images */
+    .service-oldschool   { background-image: url('images/service-oldschool.jpg'); }
+    .service-newschool   { background-image: url('images/service-newschool.jpg'); }
+    .service-tribal      { background-image: url('images/service-tribal.jpg'); }
+    .service-graywash    { background-image: url('images/service-graywash.jpg'); }
+    .service-micropig    { background-image: url('images/service-micropig.jpg'); }
+    .service-piercing    { background-image: url('images/service-piercing.jpg'); }
 
     /* ===== PRICES ===== */
     .prices-grid {
@@ -845,38 +880,38 @@
       </div>
 
       <div class="services-grid">
-        <div class="service-card">
+        <div class="service-card service-oldschool">
           <div class="service-icon">✦</div>
           <h3>Old School</h3>
           <p data-lang="pt">Tatuagem clássica com linhas fortes, cores vibrantes e estética atemporal.</p>
           <p data-lang="en">Classic tattooing with bold lines, vibrant colors and timeless aesthetics.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card service-newschool">
           <div class="service-icon">✦</div>
           <h3>New School / Bold Line</h3>
           <p data-lang="pt">Estilo contemporâneo com traços ousados, cores intensas e grande personalidade.</p>
           <p data-lang="en">Contemporary style with bold strokes, intense colors and strong personality.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card service-tribal">
           <div class="service-icon">✦</div>
           <h3>Tribal & Oriental</h3>
           <p data-lang="pt">Padrões tribais e motivos orientais com precisão e significado cultural.</p>
           <p data-lang="en">Tribal patterns and oriental motifs with precision and cultural meaning.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card service-graywash">
           <div class="service-icon">✦</div>
           <h3>Gray Wash</h3>
           <p data-lang="pt">Trabalho em tons de cinza com profundidade, sombreamento e realismo suave.</p>
           <p data-lang="en">Gray wash work with depth, shading and soft realism.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card service-micropig">
           <div class="service-icon">✦</div>
           <h3 data-lang="pt">Micro Pigmentação</h3>
           <h3 data-lang="en">Micro Pigmentation</h3>
           <p data-lang="pt">Técnica delicada para resultados precisos e naturais.</p>
           <p data-lang="en">Delicate technique for precise and natural results.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card service-piercing">
           <div class="service-icon">✦</div>
           <h3>Piercing</h3>
           <p data-lang="pt">Piercing em qualquer parte do corpo com higiene e profissionalismo.</p>
