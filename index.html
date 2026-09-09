@@ -390,6 +390,121 @@
       color: var(--text-muted);
     }
 
+    /* ===== PRICES ===== */
+    .prices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .price-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 28px;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s;
+      overflow: hidden;
+    }
+
+    .price-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    }
+
+    .price-card.featured {
+      border-color: var(--accent);
+      background: linear-gradient(180deg, rgba(201,162,39,0.08) 0%, var(--bg-card) 40%);
+    }
+
+    .price-card.featured::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .price-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .price-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+
+    .price-amount {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.1;
+      margin: 12px 0 4px;
+    }
+
+    .price-amount small {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .price-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .price-list {
+      list-style: none;
+      text-align: left;
+      margin: 0 0 24px;
+      padding: 0;
+    }
+
+    .price-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .price-list li:last-child {
+      border-bottom: none;
+    }
+
+    .price-list li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .price-note {
+      text-align: center;
+      margin-top: 36px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      max-width: 640px;
+      margin-inline: auto;
+    }
+
     /* ===== GALLERY ===== */
     .gallery-grid {
       display: grid;
@@ -627,6 +742,7 @@
         <li><a href="#home" data-lang="pt">Início</a><a href="#home" data-lang="en" class="inline">Home</a></li>
         <li><a href="#about" data-lang="pt">Sobre</a><a href="#about" data-lang="en" class="inline">About</a></li>
         <li><a href="#services" data-lang="pt">Serviços</a><a href="#services" data-lang="en" class="inline">Services</a></li>
+        <li><a href="#prices" data-lang="pt">Preços</a><a href="#prices" data-lang="en" class="inline">Prices</a></li>
         <li><a href="#gallery" data-lang="pt">Galeria</a><a href="#gallery" data-lang="en" class="inline">Gallery</a></li>
         <li><a href="#contact" data-lang="pt">Contacto</a><a href="#contact" data-lang="en" class="inline">Contact</a></li>
       </ul>
@@ -755,6 +871,133 @@
           <p data-lang="en">Piercing on any part of the body with hygiene and professionalism.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- PRICES -->
+  <section id="prices">
+    <div class="container">
+      <div class="section-header">
+        <h2>
+          <span data-lang="pt">Preços</span>
+          <span data-lang="en">Prices</span>
+        </h2>
+        <p data-lang="pt">Valores orientativos · Orçamento personalizado após consulta</p>
+        <p data-lang="en">Guiding prices · Personalized quote after consultation</p>
+        <div class="accent-line"></div>
+      </div>
+
+      <div class="prices-grid">
+        <!-- Small -->
+        <div class="price-card">
+          <h3 data-lang="pt">Pequeno</h3>
+          <h3 data-lang="en">Small</h3>
+          <div class="price-amount">15.000 <small>Kz</small></div>
+          <p class="price-desc" data-lang="pt">a partir de</p>
+          <p class="price-desc" data-lang="en">from</p>
+          <ul class="price-list">
+            <li data-lang="pt">Até 8 cm</li>
+            <li data-lang="en">Up to 8 cm</li>
+            <li data-lang="pt">1–2 horas</li>
+            <li data-lang="en">1–2 hours</li>
+            <li data-lang="pt">Design simples incluso</li>
+            <li data-lang="en">Simple design included</li>
+          </ul>
+          <a href="https://wa.me/244927666358?text=Olá%2C%20quero%20orçamento%20para%20tatuagem%20pequena" target="_blank" rel="noopener" class="btn btn-outline" style="width:100%; justify-content:center;">
+            <span data-lang="pt">Pedir Orçamento</span>
+            <span data-lang="en">Get Quote</span>
+          </a>
+        </div>
+
+        <!-- Medium / Featured -->
+        <div class="price-card featured">
+          <div class="price-badge" data-lang="pt">Mais Popular</div>
+          <div class="price-badge" data-lang="en">Most Popular</div>
+          <h3 data-lang="pt">Médio</h3>
+          <h3 data-lang="en">Medium</h3>
+          <div class="price-amount">35.000 <small>Kz</small></div>
+          <p class="price-desc" data-lang="pt">a partir de</p>
+          <p class="price-desc" data-lang="en">from</p>
+          <ul class="price-list">
+            <li data-lang="pt">8 – 15 cm</li>
+            <li data-lang="en">8 – 15 cm</li>
+            <li data-lang="pt">2–4 horas</li>
+            <li data-lang="en">2–4 hours</li>
+            <li data-lang="pt">Design personalizado</li>
+            <li data-lang="en">Custom design</li>
+            <li data-lang="pt">Sombreamento incluído</li>
+            <li data-lang="en">Shading included</li>
+          </ul>
+          <a href="https://wa.me/244927666358?text=Olá%2C%20quero%20orçamento%20para%20tatuagem%20média" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <span data-lang="pt">Pedir Orçamento</span>
+            <span data-lang="en">Get Quote</span>
+          </a>
+        </div>
+
+        <!-- Large -->
+        <div class="price-card">
+          <h3 data-lang="pt">Grande / Sessão</h3>
+          <h3 data-lang="en">Large / Session</h3>
+          <div class="price-amount">70.000 <small>Kz</small></div>
+          <p class="price-desc" data-lang="pt">a partir de</p>
+          <p class="price-desc" data-lang="en">from</p>
+          <ul class="price-list">
+            <li data-lang="pt">Acima de 15 cm</li>
+            <li data-lang="en">Over 15 cm</li>
+            <li data-lang="pt">Meia manga / peça completa</li>
+            <li data-lang="en">Half sleeve / full piece</li>
+            <li data-lang="pt">Planeamento detalhado</li>
+            <li data-lang="en">Detailed planning</li>
+            <li data-lang="pt">Sessões múltiplas possíveis</li>
+            <li data-lang="en">Multiple sessions possible</li>
+          </ul>
+          <a href="https://wa.me/244927666358?text=Olá%2C%20quero%20orçamento%20para%20tatuagem%20grande" target="_blank" rel="noopener" class="btn btn-outline" style="width:100%; justify-content:center;">
+            <span data-lang="pt">Pedir Orçamento</span>
+            <span data-lang="en">Get Quote</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Extra small row for piercing & micro -->
+      <div class="prices-grid" style="margin-top: 24px;">
+        <div class="price-card">
+          <h3>Piercing</h3>
+          <div class="price-amount">8.000 <small>Kz</small></div>
+          <p class="price-desc" data-lang="pt">a partir de · qualquer parte do corpo</p>
+          <p class="price-desc" data-lang="en">from · any body part</p>
+          <a href="https://wa.me/244927666358?text=Olá%2C%20quero%20info%20sobre%20piercing" target="_blank" rel="noopener" class="btn btn-outline" style="width:100%; justify-content:center; margin-top:12px;">
+            <span data-lang="pt">Consultar</span>
+            <span data-lang="en">Inquire</span>
+          </a>
+        </div>
+        <div class="price-card">
+          <h3 data-lang="pt">Micro Pigmentação</h3>
+          <h3 data-lang="en">Micro Pigmentation</h3>
+          <div class="price-amount">25.000 <small>Kz</small></div>
+          <p class="price-desc" data-lang="pt">a partir de · consulta necessária</p>
+          <p class="price-desc" data-lang="en">from · consultation required</p>
+          <a href="https://wa.me/244927666358?text=Olá%2C%20quero%20info%20sobre%20micro%20pigmentação" target="_blank" rel="noopener" class="btn btn-outline" style="width:100%; justify-content:center; margin-top:12px;">
+            <span data-lang="pt">Consultar</span>
+            <span data-lang="en">Inquire</span>
+          </a>
+        </div>
+        <div class="price-card">
+          <h3 data-lang="pt">Cover-up / Correção</h3>
+          <h3 data-lang="en">Cover-up / Correction</h3>
+          <div class="price-amount">40.000 <small>Kz</small></div>
+          <p class="price-desc" data-lang="pt">a partir de · avaliação obrigatória</p>
+          <p class="price-desc" data-lang="en">from · evaluation required</p>
+          <a href="https://wa.me/244927666358?text=Olá%2C%20quero%20avaliar%20cover-up" target="_blank" rel="noopener" class="btn btn-outline" style="width:100%; justify-content:center; margin-top:12px;">
+            <span data-lang="pt">Consultar</span>
+            <span data-lang="en">Inquire</span>
+          </a>
+        </div>
+      </div>
+
+      <p class="price-note">
+        <span data-lang="pt">* Preços apenas orientativos para demonstração. O valor final depende do tamanho, complexidade, estilo e tempo estimado. Contacte via WhatsApp para um orçamento exacto e personalizado.</span>
+        <span data-lang="en">* Prices are indicative for demonstration only. Final price depends on size, complexity, style and estimated time. Contact via WhatsApp for an exact personalized quote.</span>
+      </p>
     </div>
   </section>
 
