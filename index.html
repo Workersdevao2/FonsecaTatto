@@ -855,16 +855,16 @@
   <section class="hero" id="home">
     <!-- Background videos (place your 4 videos in a /videos folder) -->
     <div class="hero-videos">
-      <video muted playsinline preload="auto" class="active" data-index="0">
+      <video muted playsinline webkit-playsinline preload="auto" class="active" data-index="0">
         <source src="videos/video1.mp4" type="video/mp4">
       </video>
-      <video muted playsinline preload="auto" data-index="1">
+      <video muted playsinline webkit-playsinline preload="auto" data-index="1">
         <source src="videos/video2.mp4" type="video/mp4">
       </video>
-      <video muted playsinline preload="auto" data-index="2">
+      <video muted playsinline webkit-playsinline preload="auto" data-index="2">
         <source src="videos/video3.mp4" type="video/mp4">
       </video>
-      <video muted playsinline preload="auto" data-index="3">
+      <video muted playsinline webkit-playsinline preload="auto" data-index="3">
         <source src="videos/video4.mp4" type="video/mp4">
       </video>
     </div>
@@ -1130,16 +1130,16 @@
       <div class="gallery-grid">
         <!-- 4 Videos -->
         <div class="gallery-item is-video">
-          <video src="videos/gallery-1.mp4" muted loop playsinline autoplay></video>
+          <video src="videos/gallery-1.mp4" muted loop playsinline webkit-playsinline preload="metadata"></video>
         </div>
         <div class="gallery-item is-video">
-          <video src="videos/gallery-2.mp4" muted loop playsinline autoplay></video>
+          <video src="videos/gallery-2.mp4" muted loop playsinline webkit-playsinline preload="metadata"></video>
         </div>
         <div class="gallery-item is-video">
-          <video src="videos/gallery-3.mp4" muted loop playsinline autoplay></video>
+          <video src="videos/gallery-3.mp4" muted loop playsinline webkit-playsinline preload="metadata"></video>
         </div>
         <div class="gallery-item is-video">
-          <video src="videos/gallery-4.mp4" muted loop playsinline autoplay></video>
+          <video src="videos/gallery-4.mp4" muted loop playsinline webkit-playsinline preload="metadata"></video>
         </div>
 
         <!-- 8 Images -->
@@ -1318,21 +1318,40 @@
       });
     });
 
+    // Helper: force play a video (Safari-friendly)
+    function forcePlay(video) {
+      if (!video) return;
+      video.muted = true;
+      video.setAttribute('muted', '');
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+      const p = video.play();
+      if (p && typeof p.then === 'function') {
+        p.catch(() => {
+          // Retry once after a short delay (common Safari quirk)
+          setTimeout(() => {
+            video.muted = true;
+            video.play().catch(() => {});
+          }, 300);
+        });
+      }
+    }
+
     // Hero background videos – cycle every ~10 seconds with crossfade
     (function () {
       const videos = document.querySelectorAll('.hero-videos video');
       if (!videos.length) return;
 
       let current = 0;
-      const DURATION = 10000; // 10 seconds per video
+      const DURATION = 10000;
 
-      // Start the first video
       const playVideo = (index) => {
         videos.forEach((v, i) => {
           if (i === index) {
             v.classList.add('active');
-            v.currentTime = 0;
-            v.play().catch(() => {}); // autoplay may be blocked until user interaction on some browsers
+            try { v.currentTime = 0; } catch (e) {}
+            forcePlay(v);
           } else {
             v.classList.remove('active');
             v.pause();
@@ -1340,7 +1359,11 @@
         });
       };
 
+      // Start first video
       playVideo(0);
+
+      // Also try again after a tiny delay (helps Safari)
+      setTimeout(() => playVideo(0), 400);
 
       // Cycle
       setInterval(() => {
@@ -1348,7 +1371,6 @@
         playVideo(current);
       }, DURATION);
 
-      // Optional: if a video ends early, advance (safety)
       videos.forEach((v, i) => {
         v.addEventListener('ended', () => {
           if (i === current) {
@@ -1357,6 +1379,55 @@
           }
         });
       });
+
+      // Unlock autoplay on first user interaction (Safari requirement sometimes)
+      const unlock = () => {
+        forcePlay(videos[current]);
+        document.removeEventListener('touchstart', unlock);
+        document.removeEventListener('click', unlock);
+      };
+      document.addEventListener('touchstart', unlock, { once: true, passive: true });
+      document.addEventListener('click', unlock, { once: true });
+    })();
+
+    // Gallery videos – play when visible (Safari-friendly)
+    (function () {
+      const galleryVideos = document.querySelectorAll('.gallery-item.is-video video');
+      if (!galleryVideos.length) return;
+
+      galleryVideos.forEach(v => {
+        v.muted = true;
+        v.loop = true;
+        v.playsInline = true;
+      });
+
+      // Intersection Observer: play only when in view
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+              forcePlay(video);
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: 0.25 });
+
+        galleryVideos.forEach(v => observer.observe(v));
+      } else {
+        // Fallback
+        galleryVideos.forEach(v => forcePlay(v));
+      }
+
+      // Also unlock on first interaction
+      const unlockGallery = () => {
+        galleryVideos.forEach(v => forcePlay(v));
+        document.removeEventListener('touchstart', unlockGallery);
+        document.removeEventListener('click', unlockGallery);
+      };
+      document.addEventListener('touchstart', unlockGallery, { once: true, passive: true });
+      document.addEventListener('click', unlockGallery, { once: true });
     })();
 
     // Gallery lightbox
