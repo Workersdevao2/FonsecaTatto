@@ -574,6 +574,7 @@
       object-fit: cover;
       transition: transform 0.45s ease;
       display: block;
+      background: #111;
     }
 
     .gallery-item:hover img,
@@ -581,12 +582,41 @@
       transform: scale(1.08);
     }
 
-    .gallery-item video {
-      pointer-events: none; /* let the parent handle clicks if needed */
+    .gallery-item.is-video {
+      cursor: pointer;
     }
 
-    .gallery-item.is-video {
-      cursor: default;
+    /* Play icon overlay for videos (hides when playing) */
+    .gallery-item.is-video .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      background: rgba(0,0,0,0.55);
+      border: 2px solid rgba(255,255,255,0.85);
+      border-radius: 50%;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-item.is-video .play-icon::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 9px 0 9px 16px;
+      border-color: transparent transparent transparent #fff;
+      margin-left: 3px;
+    }
+
+    .gallery-item.is-video.playing .play-icon {
+      opacity: 0;
     }
 
     .gallery-item::after {
@@ -596,6 +626,7 @@
       background: linear-gradient(180deg, transparent 50%, rgba(10,10,12,0.55) 100%);
       opacity: 0;
       transition: opacity 0.3s;
+      pointer-events: none;
     }
 
     .gallery-item:hover::after {
@@ -1130,16 +1161,20 @@
       <div class="gallery-grid">
         <!-- 4 Videos -->
         <div class="gallery-item is-video">
-          <video src="videos/gallery-1.mp4" muted loop playsinline webkit-playsinline preload="metadata"></video>
+          <video src="videos/gallery-1.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
+          <div class="play-icon"></div>
         </div>
         <div class="gallery-item is-video">
-          <video src="videos/gallery-2.mp4" muted loop playsinline webkit-playsinline preload="metadata"></video>
+          <video src="videos/gallery-2.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
+          <div class="play-icon"></div>
         </div>
         <div class="gallery-item is-video">
-          <video src="videos/gallery-3.mp4" muted loop playsinline webkit-playsinline preload="metadata"></video>
+          <video src="videos/gallery-3.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
+          <div class="play-icon"></div>
         </div>
         <div class="gallery-item is-video">
-          <video src="videos/gallery-4.mp4" muted loop playsinline webkit-playsinline preload="metadata"></video>
+          <video src="videos/gallery-4.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
+          <div class="play-icon"></div>
         </div>
 
         <!-- 8 Images -->
@@ -1318,23 +1353,49 @@
       });
     });
 
-    // Helper: force play a video (Safari-friendly)
-    function forcePlay(video) {
+    // Helper: prepare + force play a video (Safari / iOS friendly)
+    function prepareVideo(video) {
       if (!video) return;
       video.muted = true;
+      video.defaultMuted = true;
       video.setAttribute('muted', '');
       video.playsInline = true;
       video.setAttribute('playsinline', '');
       video.setAttribute('webkit-playsinline', '');
+      video.loop = true;
+    }
+
+    function forcePlay(video) {
+      if (!video) return Promise.resolve();
+      prepareVideo(video);
       const p = video.play();
       if (p && typeof p.then === 'function') {
-        p.catch(() => {
-          // Retry once after a short delay (common Safari quirk)
-          setTimeout(() => {
-            video.muted = true;
-            video.play().catch(() => {});
-          }, 300);
+        return p.catch(() => {
+          return new Promise(resolve => {
+            setTimeout(() => {
+              prepareVideo(video);
+              video.play().then(resolve).catch(resolve);
+            }, 250);
+          });
         });
+      }
+      return Promise.resolve();
+    }
+
+    // Show first frame even if autoplay is blocked
+    function showFirstFrame(video) {
+      if (!video) return;
+      const onMeta = () => {
+        try {
+          video.currentTime = 0.1;
+        } catch (e) {}
+        video.removeEventListener('loadedmetadata', onMeta);
+      };
+      if (video.readyState >= 1) {
+        try { video.currentTime = 0.1; } catch (e) {}
+      } else {
+        video.addEventListener('loadedmetadata', onMeta);
+        video.load();
       }
     }
 
@@ -1346,11 +1407,15 @@
       let current = 0;
       const DURATION = 10000;
 
+      videos.forEach(v => {
+        prepareVideo(v);
+        showFirstFrame(v);
+      });
+
       const playVideo = (index) => {
         videos.forEach((v, i) => {
           if (i === index) {
             v.classList.add('active');
-            try { v.currentTime = 0; } catch (e) {}
             forcePlay(v);
           } else {
             v.classList.remove('active');
@@ -1359,13 +1424,10 @@
         });
       };
 
-      // Start first video
       playVideo(0);
+      setTimeout(() => playVideo(0), 500);
+      setTimeout(() => playVideo(0), 1500);
 
-      // Also try again after a tiny delay (helps Safari)
-      setTimeout(() => playVideo(0), 400);
-
-      // Cycle
       setInterval(() => {
         current = (current + 1) % videos.length;
         playVideo(current);
@@ -1380,54 +1442,88 @@
         });
       });
 
-      // Unlock autoplay on first user interaction (Safari requirement sometimes)
+      // Unlock on first interaction (critical for Safari)
       const unlock = () => {
         forcePlay(videos[current]);
-        document.removeEventListener('touchstart', unlock);
-        document.removeEventListener('click', unlock);
       };
       document.addEventListener('touchstart', unlock, { once: true, passive: true });
       document.addEventListener('click', unlock, { once: true });
+      document.addEventListener('scroll', unlock, { once: true, passive: true });
     })();
 
-    // Gallery videos – play when visible (Safari-friendly)
+    // Gallery videos
     (function () {
-      const galleryVideos = document.querySelectorAll('.gallery-item.is-video video');
-      if (!galleryVideos.length) return;
+      const items = document.querySelectorAll('.gallery-item.is-video');
+      if (!items.length) return;
 
-      galleryVideos.forEach(v => {
-        v.muted = true;
-        v.loop = true;
-        v.playsInline = true;
+      items.forEach(item => {
+        const video = item.querySelector('video');
+        if (!video) return;
+
+        prepareVideo(video);
+        showFirstFrame(video);
+
+        // Mark as playing when it actually starts
+        video.addEventListener('playing', () => {
+          item.classList.add('playing');
+        });
+        video.addEventListener('pause', () => {
+          // only remove if not intentionally playing
+          if (video.paused) item.classList.remove('playing');
+        });
+
+        // Tap / click to toggle play (fallback when autoplay is blocked)
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (video.paused) {
+            forcePlay(video).then(() => item.classList.add('playing'));
+          } else {
+            video.pause();
+            item.classList.remove('playing');
+          }
+        });
       });
 
-      // Intersection Observer: play only when in view
+      // Try autoplay when video enters viewport
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
-            const video = entry.target;
+            const item = entry.target;
+            const video = item.querySelector('video');
+            if (!video) return;
             if (entry.isIntersecting) {
-              forcePlay(video);
+              forcePlay(video).then(() => {
+                if (!video.paused) item.classList.add('playing');
+              });
             } else {
               video.pause();
+              item.classList.remove('playing');
             }
           });
-        }, { threshold: 0.25 });
+        }, { threshold: 0.35 });
 
-        galleryVideos.forEach(v => observer.observe(v));
+        items.forEach(item => observer.observe(item));
       } else {
-        // Fallback
-        galleryVideos.forEach(v => forcePlay(v));
+        items.forEach(item => {
+          const video = item.querySelector('video');
+          forcePlay(video);
+        });
       }
 
-      // Also unlock on first interaction
-      const unlockGallery = () => {
-        galleryVideos.forEach(v => forcePlay(v));
-        document.removeEventListener('touchstart', unlockGallery);
-        document.removeEventListener('click', unlockGallery);
+      // Global unlock on first interaction
+      const unlockAll = () => {
+        items.forEach(item => {
+          const video = item.querySelector('video');
+          if (video && video.paused) {
+            forcePlay(video).then(() => {
+              if (!video.paused) item.classList.add('playing');
+            });
+          }
+        });
       };
-      document.addEventListener('touchstart', unlockGallery, { once: true, passive: true });
-      document.addEventListener('click', unlockGallery, { once: true });
+      document.addEventListener('touchstart', unlockAll, { once: true, passive: true });
+      document.addEventListener('click', unlockAll, { once: true });
+      document.addEventListener('scroll', unlockAll, { once: true, passive: true });
     })();
 
     // Gallery lightbox
@@ -1463,4 +1559,5 @@
   </script>
 </body>
 </html>
+
 
