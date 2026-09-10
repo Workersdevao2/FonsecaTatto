@@ -196,6 +196,47 @@
         radial-gradient(ellipse 70% 50% at 50% 30%, rgba(201,162,39,0.08), transparent);
     }
 
+    .hero-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.5);
+      border: 2px solid rgba(255,255,255,0.9);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.35s, transform 0.25s, background 0.25s;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-play-btn::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 12px 0 12px 20px;
+      border-color: transparent transparent transparent #fff;
+      margin-left: 4px;
+    }
+
+    .hero-play-btn:hover {
+      background: rgba(201,162,39,0.85);
+      border-color: var(--accent);
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+
+    .hero-play-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+
     .hero-content {
       position: relative;
       z-index: 2;
@@ -900,6 +941,7 @@
       </video>
     </div>
     <div class="hero-overlay"></div>
+    <button class="hero-play-btn" id="heroPlayBtn" aria-label="Play video" type="button"></button>
 
     <div class="hero-content">
       <h1>
@@ -1402,26 +1444,41 @@
     // Hero background videos – cycle every ~10 seconds with crossfade
     (function () {
       const videos = document.querySelectorAll('.hero-videos video');
+      const playBtn = document.getElementById('heroPlayBtn');
       if (!videos.length) return;
 
       let current = 0;
       const DURATION = 10000;
 
+      const updatePlayBtn = () => {
+        if (!playBtn) return;
+        const active = videos[current];
+        if (active && !active.paused && !active.ended) {
+          playBtn.classList.add('hidden');
+        } else {
+          playBtn.classList.remove('hidden');
+        }
+      };
+
       videos.forEach(v => {
         prepareVideo(v);
         showFirstFrame(v);
+        v.addEventListener('playing', updatePlayBtn);
+        v.addEventListener('pause', updatePlayBtn);
+        v.addEventListener('ended', updatePlayBtn);
       });
 
       const playVideo = (index) => {
         videos.forEach((v, i) => {
           if (i === index) {
             v.classList.add('active');
-            forcePlay(v);
+            forcePlay(v).then(updatePlayBtn);
           } else {
             v.classList.remove('active');
             v.pause();
           }
         });
+        updatePlayBtn();
       };
 
       playVideo(0);
@@ -1442,13 +1499,24 @@
         });
       });
 
+      // Play button click
+      if (playBtn) {
+        playBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          forcePlay(videos[current]).then(updatePlayBtn);
+        });
+      }
+
       // Unlock on first interaction (critical for Safari)
       const unlock = () => {
-        forcePlay(videos[current]);
+        forcePlay(videos[current]).then(updatePlayBtn);
       };
       document.addEventListener('touchstart', unlock, { once: true, passive: true });
       document.addEventListener('click', unlock, { once: true });
       document.addEventListener('scroll', unlock, { once: true, passive: true });
+
+      // Initial state
+      updatePlayBtn();
     })();
 
     // Gallery videos
