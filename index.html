@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Fonseca Tattoo | Mira Artes Estúdio - Tatuagens profissionais e piercing em Luanda, Angola. Old School, New School, Tribal, Oriental, Gray Wash e Micro Pigmentação." />
+  <title>Fonseca Tattoo | Mira Artes Estúdio – Luanda</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f7f5f0;
+      --bg-soft: #f0ede6;
+      --bg-card: #ffffff;
+      --text: #1c1c1c;
+      --text-muted: #6a6a66;
+      --accent: #b89b5e;
+      --accent-soft: rgba(184, 155, 94, 0.12);
+      --border: #e4e0d8;
+      --border-strong: #d4cfc4;
+      --whatsapp: #25D366;
+      --radius: 4px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      letter-spacing: 0.01em;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img, video {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin-inline: auto;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(247, 245, 240, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .logo span {
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    /* Thin-line hamburger → X */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      width: 28px;
+      height: 20px;
+      position: relative;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .menu-toggle span {
+      display: block;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--text);
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle span:nth-child(1) { top: 0; }
+    .menu-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .menu-toggle span:nth-child(3) { bottom: 0; }
+
+    .menu-toggle.open span:nth-child(1) {
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+    }
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.open span:nth-child(3) {
+      bottom: 50%;
+      transform: translateY(50%) rotate(-45deg);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 72px;
+      position: relative;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .hero-videos {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-videos video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    .hero-videos video.active {
+      opacity: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.5) 40%, rgba(10,10,10,0.82) 100%);
+    }
+
+    .hero-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.7);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.35s, transform 0.25s, border-color 0.25s;
+    }
+
+    .hero-play-btn::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 16px;
+      border-color: transparent transparent transparent #fff;
+      margin-left: 3px;
+    }
+
+    .hero-play-btn:hover {
+      border-color: var(--accent);
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    .hero-play-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 780px;
+      padding: 0 20px;
+      color: #f5f5f5;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.4rem, 6.5vw, 4.2rem);
+      font-weight: 400;
+      margin-bottom: 20px;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-content h1 span.accent {
+      color: var(--accent);
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(245,245,245,0.8);
+      margin-bottom: 36px;
+      max-width: 520px;
+      margin-inline: auto;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #1a1a1a;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .btn-whatsapp {
+      background: var(--whatsapp);
+      color: #fff;
+      border-color: var(--whatsapp);
+    }
+
+    .btn-whatsapp:hover {
+      background: transparent;
+      color: var(--whatsapp);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #f5f5f5;
+      border-color: rgba(255,255,255,0.45);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+    }
+
+    .btn-outline-dark:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 400;
+      margin-bottom: 14px;
+      letter-spacing: 0.06em;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 480px;
+      margin-inline: auto;
+      font-weight: 300;
+    }
+
+    .accent-line {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 20px auto 0;
+    }
+
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-photo {
+      position: relative;
+    }
+
+    .about-photo img {
+      width: 100%;
+      border: 1px solid var(--border);
+      object-fit: cover;
+      aspect-ratio: 4/5;
+    }
+
+    .about-photo::after {
+      content: '';
+      position: absolute;
+      inset: 14px -14px -14px 14px;
+      border: 1px solid var(--accent);
+      z-index: -1;
+      opacity: 0.5;
+    }
+
+    .about-content h3 {
+      font-size: 1.7rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+
+    .about-content p {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    .quote-box {
+      border-left: 1.5px solid var(--accent);
+      padding: 16px 0 16px 22px;
+      margin-top: 28px;
+    }
+
+    .quote-box p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 0;
+      font-weight: 400;
+    }
+
+    /* ===== SERVICES ===== */
+    .services-section {
+      background: var(--bg-soft);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 0;
+      min-height: 260px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      transition: border-color 0.3s;
+    }
+
+    .service-card:hover {
+      border-color: var(--accent);
+    }
+
+    .service-card .card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s ease;
+    }
+
+    .service-card:hover .card-bg {
+      transform: scale(1.04);
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.72) 100%);
+      z-index: 1;
+    }
+
+    .service-card .card-body {
+      position: relative;
+      z-index: 2;
+      padding: 24px 22px;
+      color: #fff;
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      letter-spacing: 0.03em;
+      color: #fff;
+    }
+
+    .service-card p {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.55;
+    }
+
+    .service-oldschool .card-bg { background-image: url('images/service-oldschool.jpg'); }
+    .service-newschool .card-bg { background-image: url('images/service-newschool.jpg'); }
+    .service-tribal .card-bg { background-image: url('images/service-tribal.jpg'); }
+    .service-graywash .card-bg { background-image: url('images/service-graywash.jpg'); }
+    .service-micropig .card-bg { background-image: url('images/service-micropig.jpg'); }
+    .service-piercing .card-bg { background-image: url('images/service-piercing.jpg'); }
+
+    /* ===== PRICES ===== */
+    .prices-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .price-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 36px 28px;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+
+    .price-card:hover {
+      border-color: var(--accent);
+    }
+
+    .price-card.featured {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .price-badge {
+      display: inline-block;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      margin-bottom: 16px;
+    }
+
+    .price-card h3 {
+      font-size: 1.35rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .price-desc {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .price-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.1;
+      margin: 8px 0 22px;
+    }
+
+    .price-amount small {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .price-list {
+      list-style: none;
+      text-align: left;
+      margin: 0 0 28px;
+      padding: 0;
+    }
+
+    .price-list li {
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .price-list li:last-child {
+      border-bottom: none;
+    }
+
+    .price-list li::before {
+      content: '';
+      width: 5px;
+      height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .price-note {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      max-width: 620px;
+      margin-inline: auto;
+      font-weight: 300;
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery-section {
+      background: var(--bg-soft);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img,
+    .gallery-item:hover video {
+      transform: scale(1.05);
+    }
+
+    .gallery-item.is-video .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border: 1.5px solid rgba(255,255,255,0.85);
+      border-radius: 50%;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      background: rgba(0,0,0,0.25);
+    }
+
+    .gallery-item.is-video .play-icon::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 7px 0 7px 12px;
+      border-color: transparent transparent transparent #fff;
+      margin-left: 2px;
+    }
+
+    .gallery-item.is-video.playing .play-icon {
+      opacity: 0;
+    }
+
+    .gallery-item:hover {
+      border-color: var(--accent);
+    }
+
+    .gallery-note {
+      text-align: center;
+      margin-top: 28px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 300;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(20,20,18,0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      padding: 24px;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox img {
+      max-width: min(90vw, 960px);
+      max-height: 85vh;
+      object-fit: contain;
+      border: 1px solid var(--border);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 300;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .lightbox-close:hover {
+      opacity: 1;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.95rem;
+      color: var(--accent);
+    }
+
+    .contact-item h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .contact-item p,
+    .contact-item a {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 300;
+    }
+
+    .contact-item a:hover {
+      color: var(--accent);
+    }
+
+    .map-wrapper {
+      border: 1px solid var(--border);
+      height: 360px;
+      overflow: hidden;
+    }
+
+    .map-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(40%) contrast(1.05);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .social-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0 36px;
+      text-align: center;
+    }
+
+    footer .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+
+    /* ===== LANGUAGE ===== */
+    [data-lang="en"] { display: none; }
+    body.lang-en [data-lang="pt"] { display: none; }
+    body.lang-en [data-lang="en"] { display: block; }
+    body.lang-en span[data-lang="en"] { display: inline; }
+    body.lang-en .nav-links a[data-lang="en"] { display: inline; }
+
+    body:not(.lang-en) [data-lang="en"] { display: none !important; }
+    body.lang-en [data-lang="pt"] { display: none !important; }
+    body.lang-en [data-lang="en"].inline { display: inline !important; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 960px) {
+      .services-grid,
+      .prices-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 800px) {
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        flex-direction: column;
+        padding: 28px 24px;
+        border-bottom: 1px solid var(--border);
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-right {
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      section {
+        padding: 72px 0;
+      }
+
+      .services-grid,
+      .prices-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .section-header {
+        margin-bottom: 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="container nav">
+      <a href="#home" class="logo">
+        FONSECA <span>TATTOO</span>
+      </a>
+
+      <div class="nav-right">
+        <div class="lang-switch">
+          <button class="lang-btn active" data-set-lang="pt">PT</button>
+          <button class="lang-btn" data-set-lang="en">EN</button>
+        </div>
+
+        <button class="menu-toggle" aria-label="Menu" type="button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="#home" data-lang="pt">Início</a><a href="#home" data-lang="en" class="inline">Home</a></li>
+          <li><a href="#about" data-lang="pt">Sobre</a><a href="#about" data-lang="en" class="inline">About</a></li>
+          <li><a href="#services" data-lang="pt">Serviços</a><a href="#services" data-lang="en" class="inline">Services</a></li>
+          <li><a href="#prices" data-lang="pt">Preços</a><a href="#prices" data-lang="en" class="inline">Prices</a></li>
+          <li><a href="#gallery" data-lang="pt">Galeria</a><a href="#gallery" data-lang="en" class="inline">Gallery</a></li>
+          <li><a href="#contact" data-lang="pt">Contacto</a><a href="#contact" data-lang="en" class="inline">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-videos">
+      <video muted playsinline webkit-playsinline preload="auto" class="active" data-index="0">
+        <source src="videos/video3.mp4" type="video/mp4">
+      </video>
+      <video muted playsinline webkit-playsinline preload="auto" data-index="1">
+        <source src="videos/video2.mp4" type="video/mp4">
+      </video>
+      <video muted playsinline webkit-playsinline preload="auto" data-index="2">
+        <source src="videos/video1.mp4" type="video/mp4">
+      </video>
+      <video muted playsinline webkit-playsinline preload="auto" data-index="3">
+        <source src="videos/video4.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-overlay"></div>
+    <button class="hero-play-btn" id="heroPlayBtn" aria-label="Play video" type="button"></button>
+
+    <div class="hero-content">
+      <h1>
+        <span data-lang="pt">Arte na Pele.</span>
+        <span data-lang="en">Art on Skin.</span><br>
+        <span class="accent" data-lang="pt">Paixão em Cada Traço.</span>
+        <span class="accent" data-lang="en">Passion in Every Line.</span>
+      </h1>
+      <p class="hero-tagline">
+        <span data-lang="pt">Fonseca Tattoo — Mira Artes Estúdio. Tatuagens profissionais e piercing em Luanda, Angola.</span>
+        <span data-lang="en">Fonseca Tattoo — Mira Artes Studio. Professional tattoos and piercing in Luanda, Angola.</span>
+      </p>
+      <div class="hero-cta">
+        <a href="https://wa.me/244927666358?text=Olá%20Fonseca%2C%20gostaria%20de%20marcar%20uma%20tatuagem" target="_blank" rel="noopener" class="btn btn-whatsapp">
+          WhatsApp
+        </a>
+        <a href="#contact" class="btn btn-outline">
+          <span data-lang="pt">Marcar Sessão</span>
+          <span data-lang="en">Book Session</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <h2>
+          <span data-lang="pt">O Artista</span>
+          <span data-lang="en">The Artist</span>
+        </h2>
+        <div class="accent-line"></div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-photo">
+          <img src="images/owner.jpg" alt="Fonseca - Artista de Tatuagem" />
+        </div>
+        <div class="about-content">
+          <h3>Fonseca Tattoo</h3>
+          <p data-lang="pt">
+            Artista de tatuagem profissional, especialista em artes corporais e condutor de artes. Baseado em Luanda, Angola, Fonseca transforma ideias em arte permanente com dedicação e precisão em cada detalhe.
+          </p>
+          <p data-lang="en">
+            Professional tattoo artist, specialist in body arts and art conductor. Based in Luanda, Angola, Fonseca turns ideas into permanent art with dedication and precision in every detail.
+          </p>
+          <p data-lang="pt">
+            No Mira Artes Estúdio, cada projeto começa com um bom planeamento. O passado não precisa ficar marcado para sempre — transformamos erros em arte.
+          </p>
+          <p data-lang="en">
+            At Mira Artes Studio, every project starts with good planning. The past doesn’t have to stay marked forever — we transform mistakes into art.
+          </p>
+
+          <div class="quote-box">
+            <p data-lang="pt">“Grandes tatuagens começam com um bom planeamento. Aqui cada detalhe é feito com dedicação.”</p>
+            <p data-lang="en">“Great tattoos start with good planning. Here every detail is made with dedication.”</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>
+          <span data-lang="pt">Serviços</span>
+          <span data-lang="en">Services</span>
+        </h2>
+        <p data-lang="pt">Estilos e técnicas com qualidade profissional</p>
+        <p data-lang="en">Styles and techniques with professional quality</p>
+        <div class="accent-line"></div>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card service-oldschool">
+          <div class="card-bg"></div>
+          <div class="card-body">
+            <h3>Old School</h3>
+            <p data-lang="pt">Tatuagem clássica com linhas fortes, cores vibrantes e estética atemporal.</p>
+            <p data-lang="en">Classic tattooing with bold lines, vibrant colors and timeless aesthetics.</p>
+          </div>
+        </div>
+        <div class="service-card service-newschool">
+          <div class="card-bg"></div>
+          <div class="card-body">
+            <h3>New School / Bold Line</h3>
+            <p data-lang="pt">Estilo contemporâneo com traços ousados, cores intensas e grande personalidade.</p>
+            <p data-lang="en">Contemporary style with bold strokes, intense colors and strong personality.</p>
+          </div>
+        </div>
+        <div class="service-card service-tribal">
+          <div class="card-bg"></div>
+          <div class="card-body">
+            <h3>Tribal & Oriental</h3>
+            <p data-lang="pt">Padrões tribais e motivos orientais com precisão e significado cultural.</p>
+            <p data-lang="en">Tribal patterns and oriental motifs with precision and cultural meaning.</p>
+          </div>
+        </div>
+        <div class="service-card service-graywash">
+          <div class="card-bg"></div>
+          <div class="card-body">
+            <h3>Gray Wash</h3>
+            <p data-lang="pt">Trabalho em tons de cinza com profundidade, sombreamento e realismo suave.</p>
+            <p data-lang="en">Gray wash work with depth, shading and soft realism.</p>
+          </div>
+        </div>
+        <div class="service-card service-micropig">
+          <div class="card-bg"></div>
+          <div class="card-body">
+            <h3 data-lang="pt">Micro Pigmentação</h3>
+            <h3 data-lang="en">Micro Pigmentation</h3>
+            <p data-lang="pt">Técnica delicada para resultados precisos e naturais.</p>
+            <p data-lang="en">Delicate technique for precise and natural results.</p>
+          </div>
+        </div>
+        <div class="service-card service-piercing">
+          <div class="card-bg"></div>
+          <div class="card-body">
+            <h3>Piercing</h3>
+            <p data-lang="pt">Piercing em qualquer parte do corpo com higiene e profissionalismo.</p>
+            <p data-lang="en">Piercing on any part of the body with hygiene and professionalism.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICES -->
+  <section id="prices">
+    <div class="container">
+      <div class="section-header">
+        <h2>
+          <span data-lang="pt">Preços</span>
+          <span data-lang="en">Prices</span>
+        </h2>
+        <p data-lang="pt">Valores orientativos · Orçamento personalizado após consulta</p>
+        <p data-lang="en">Guiding prices · Personalized quote after consultation</p>
+        <div class="accent-line"></div>
+      </div>
+
+      <div class="prices-grid">
+        <div class="price-card">
+          <h3 data-lang="pt">Pequeno</h3>
+          <h3 data-lang="en">Small</h3>
+          <p class="price-desc" data-lang="pt">a partir de</p>
+          <p class="price-desc" data-lang="en">from</p>
+          <div class="price-amount">15.000 <small>Kz</small></div>
+          <ul class="price-list">
+            <li data-lang="pt">Até 8 cm</li>
+            <li data-lang="en">Up to 8 cm</li>
+            <li data-lang="pt">1–2 horas</li>
+            <li data-lang="en">1–2 hours</li>
+            <li data-lang="pt">Design simples incluso</li>
+            <li data-lang="en">Simple design included</li>
+          </ul>
+          <a href="https://wa.me/244927666358?text=Olá%2C%20quero%20orçamento%20para%20tatuagem%20pequena" target="_blank" rel="noopener" class="btn btn-outline-dark" style="width:100%;">
+            <span data-lang="pt">Pedir Orçamento</span>
+            <span data-lang="en">Get Quote</span>
+          </a>
+        </div>
+
+        <div class="price-card featured">
+          <div class="price-badge" data-lang="pt">Mais Popular</div>
+          <div class="price-badge" data-lang="en">Most Popular</div>
+          <h3 data-lang="pt">Médio</h3>
+          <h3 data-lang="en">Medium</h3>
+          <p class="price-desc" data-lang="pt">a partir de</p>
+          <p class="price-desc" data-lang="en">from</p>
+          <div class="price-amount">35.000 <small>Kz</small></div>
+          <ul class="price-list">
+            <li data-lang="pt">8 – 15 cm</li>
+            <li data-lang="en">8 – 15 cm</li>
+            <li data-lang="pt">2–4 horas</li>
+            <li data-lang="en">2–4 hours</li>
+            <li data-lang="pt">Design personalizado</li>
+            <li data-lang="en">Custom design</li>
+            <li data-lang="pt">Sombreamento incluído</li>
+            <li data-lang="en">Shading included</li>
+          </ul>
+          <a href="https://wa.me/244927666358?text=Olá%2C%20quero%20orçamento%20para%20tatuagem%20média" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%;">
+            <span data-lang="pt">Pedir Orçamento</span>
+            <span data-lang="en">Get Quote</span>
+          </a>
+        </div>
+
+        <div class="price-card">
+          <h3 data-lang="pt">Grande / Sessão</h3>
+          <h3 data-lang="en">Large / Session</h3>
+          <p class="price-desc" data-lang="pt">a partir de</p>
+          <p class="price-desc" data-lang="en">from</p>
+          <div class="price-amount">70.000 <small>Kz</small></div>
+          <ul class="price-list">
+            <li data-lang="pt">Acima de 15 cm</li>
+            <li data-lang="en">Over 15 cm</li>
+            <li data-lang="pt">Meia manga / peça completa</li>
+            <li data-lang="en">Half sleeve / full piece</li>
+            <li data-lang="pt">Planeamento detalhado</li>
+            <li data-lang="en">Detailed planning</li>
+            <li data-lang="pt">Sessões múltiplas possíveis</li>
+            <li data-lang="en">Multiple sessions possible</li>
+          </ul>
+          <a href="https://wa.me/244927666358?text=Olá%2C%20quero%20orçamento%20para%20tatuagem%20grande" target="_blank" rel="noopener" class="btn btn-outline-dark" style="width:100%;">
+            <span data-lang="pt">Pedir Orçamento</span>
+            <span data-lang="en">Get Quote</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="prices-grid" style="margin-top: 20px;">
+        <div class="price-card">
+          <h3>Piercing</h3>
+          <div class="price-amount">8.000 <small>Kz</small></div>
+          <p class="price-desc" data-lang="pt">a partir de · qualquer parte do corpo</p>
+          <p class="price-desc" data-lang="en">from · any body part</p>
+          <a href="https://wa.me/244927666358?text=Olá%2C%20quero%20info%20sobre%20piercing" target="_blank" rel="noopener" class="btn btn-outline-dark" style="width:100%; margin-top:16px;">
+            <span data-lang="pt">Consultar</span>
+            <span data-lang="en">Inquire</span>
+          </a>
+        </div>
+        <div class="price-card">
+          <h3 data-lang="pt">Micro Pigmentação</h3>
+          <h3 data-lang="en">Micro Pigmentation</h3>
+          <div class="price-amount">25.000 <small>Kz</small></div>
+          <p class="price-desc" data-lang="pt">a partir de · consulta necessária</p>
+          <p class="price-desc" data-lang="en">from · consultation required</p>
+          <a href="https://wa.me/244927666358?text=Olá%2C%20quero%20info%20sobre%20micro%20pigmentação" target="_blank" rel="noopener" class="btn btn-outline-dark" style="width:100%; margin-top:16px;">
+            <span data-lang="pt">Consultar</span>
+            <span data-lang="en">Inquire</span>
+          </a>
+        </div>
+        <div class="price-card">
+          <h3 data-lang="pt">Cover-up / Correção</h3>
+          <h3 data-lang="en">Cover-up / Correction</h3>
+          <div class="price-amount">40.000 <small>Kz</small></div>
+          <p class="price-desc" data-lang="pt">a partir de · avaliação obrigatória</p>
+          <p class="price-desc" data-lang="en">from · evaluation required</p>
+          <a href="https://wa.me/244927666358?text=Olá%2C%20quero%20avaliar%20cover-up" target="_blank" rel="noopener" class="btn btn-outline-dark" style="width:100%; margin-top:16px;">
+            <span data-lang="pt">Consultar</span>
+            <span data-lang="en">Inquire</span>
+          </a>
+        </div>
+      </div>
+
+      <p class="price-note">
+        <span data-lang="pt">* Preços apenas orientativos. O valor final depende do tamanho, complexidade, estilo e tempo estimado. Contacte via WhatsApp para um orçamento exacto e personalizado.</span>
+        <span data-lang="en">* Prices are indicative only. Final price depends on size, complexity, style and estimated time. Contact via WhatsApp for an exact personalized quote.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>
+          <span data-lang="pt">Galeria</span>
+          <span data-lang="en">Gallery</span>
+        </h2>
+        <p data-lang="pt">Alguns trabalhos e inspirações</p>
+        <p data-lang="en">Some works and inspirations</p>
+        <div class="accent-line"></div>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item is-video">
+          <video src="videos/gallery-1.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
+          <div class="play-icon"></div>
+        </div>
+        <div class="gallery-item is-video">
+          <video src="videos/gallery-2.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
+          <div class="play-icon"></div>
+        </div>
+        <div class="gallery-item is-video">
+          <video src="videos/gallery-3.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
+          <div class="play-icon"></div>
+        </div>
+        <div class="gallery-item is-video">
+          <video src="videos/gallery-4.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
+          <div class="play-icon"></div>
+        </div>
+
+        <div class="gallery-item" data-full="images/gallery-1.jpg">
+          <img src="images/gallery-1.jpg" alt="Fonseca Tattoo work 1" loading="lazy">
+        </div>
+        <div class="gallery-item" data-full="images/gallery-2.jpg">
+          <img src="images/gallery-2.jpg" alt="Fonseca Tattoo work 2" loading="lazy">
+        </div>
+        <div class="gallery-item" data-full="images/gallery-3.jpg">
+          <img src="images/gallery-3.jpg" alt="Fonseca Tattoo work 3" loading="lazy">
+        </div>
+        <div class="gallery-item" data-full="images/gallery-4.jpg">
+          <img src="images/gallery-4.jpg" alt="Fonseca Tattoo work 4" loading="lazy">
+        </div>
+        <div class="gallery-item" data-full="images/gallery-5.jpg">
+          <img src="images/gallery-5.jpg" alt="Fonseca Tattoo work 5" loading="lazy">
+        </div>
+        <div class="gallery-item" data-full="images/gallery-6.jpg">
+          <img src="images/gallery-6.jpg" alt="Fonseca Tattoo work 6" loading="lazy">
+        </div>
+        <div class="gallery-item" data-full="images/gallery-7.jpg">
+          <img src="images/gallery-7.jpg" alt="Fonseca Tattoo work 7" loading="lazy">
+        </div>
+        <div class="gallery-item" data-full="images/gallery-8.jpg">
+          <img src="images/gallery-8.jpg" alt="Fonseca Tattoo work 8" loading="lazy">
+        </div>
+      </div>
+      <p class="gallery-note">
+        <span data-lang="pt">Vídeos em loop · Clique nas imagens para ver em tamanho maior.</span>
+        <span data-lang="en">Looping videos · Click images to view larger.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <img src="" alt="Gallery preview">
+  </div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2>
+          <span data-lang="pt">Contacto & Localização</span>
+          <span data-lang="en">Contact & Location</span>
+        </h2>
+        <div class="accent-line"></div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4 data-lang="pt">Localização</h4>
+              <h4 data-lang="en">Location</h4>
+              <p data-lang="pt">Rotunda da Camama, junto ao viaduto sentido Golf 2<br>Luanda, Angola</p>
+              <p data-lang="en">Camama Roundabout, next to the viaduct towards Golf 2<br>Luanda, Angola</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div>
+              <h4>WhatsApp</h4>
+              <p><a href="https://wa.me/244927666358" target="_blank" rel="noopener">+244 927 666 358</a></p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <h4 data-lang="pt">Telefone</h4>
+              <h4 data-lang="en">Phone</h4>
+              <p><a href="tel:+244927269701">+244 927 269 701</a></p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">◎</div>
+            <div>
+              <h4 data-lang="pt">Redes Sociais</h4>
+              <h4 data-lang="en">Social Media</h4>
+              <div class="social-links">
+                <a href="https://www.instagram.com/fonseca_tattooss/" target="_blank" rel="noopener" class="social-btn" title="Instagram @fonseca_tattooss">IG</a>
+                <a href="https://www.facebook.com/fonseca.tattooss" target="_blank" rel="noopener" class="social-btn" title="Facebook Fonseca Tattoo">FB</a>
+              </div>
+              <p style="margin-top:8px; font-size:0.82rem;">
+                Instagram: @fonseca_tattooss<br>
+                Facebook: fonseca.tattooss
+              </p>
+            </div>
+          </div>
+
+          <div style="margin-top: 8px;">
+            <a href="https://wa.me/244927666358?text=Olá%20Fonseca%2C%20gostaria%20de%20marcar%20uma%20tatuagem" target="_blank" rel="noopener" class="btn btn-whatsapp" style="width:100%;">
+              <span data-lang="pt">Falar no WhatsApp</span>
+              <span data-lang="en">Chat on WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="map-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=Rotunda+da+Camama,+Luanda,+Angola&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Localização Fonseca Tattoo - Rotunda da Camama">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="brand">FONSECA TATTOO · MIRA ARTES ESTÚDIO</div>
+      <p data-lang="pt">© 2026 Fonseca Tattoo. Todos os direitos reservados. · Luanda, Angola</p>
+      <p data-lang="en">© 2026 Fonseca Tattoo. All rights reserved. · Luanda, Angola</p>
+    </div>
+  </footer>
+
+  <script>
+    // Language switcher
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const body = document.body;
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.setLang;
+        langButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (lang === 'en') {
+          body.classList.add('lang-en');
+          document.documentElement.lang = 'en';
+        } else {
+          body.classList.remove('lang-en');
+          document.documentElement.lang = 'pt';
+        }
+      });
+    });
+
+    // Mobile menu – thin hamburger → X
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.classList.remove('open');
+      });
+    });
+
+    // Active nav on scroll
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY + 100;
+      sections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        if (scrollY >= top && scrollY < top + height) {
+          document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+          document.querySelectorAll(`.nav-links a[href="#${id}"]`).forEach(a => a.classList.add('active'));
+        }
+      });
+    });
+
+    // Video helpers
+    function prepareVideo(video) {
+      if (!video) return;
+      video.muted = true;
+      video.defaultMuted = true;
+      video.setAttribute('muted', '');
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+      video.loop = true;
+    }
+
+    function forcePlay(video) {
+      if (!video) return Promise.resolve();
+      prepareVideo(video);
+      const p = video.play();
+      if (p && typeof p.then === 'function') {
+        return p.catch(() => {
+          return new Promise(resolve => {
+            setTimeout(() => {
+              prepareVideo(video);
+              video.play().then(resolve).catch(resolve);
+            }, 250);
+          });
+        });
+      }
+      return Promise.resolve();
+    }
+
+    function showFirstFrame(video) {
+      if (!video) return;
+      const onMeta = () => {
+        try { video.currentTime = 0.1; } catch (e) {}
+        video.removeEventListener('loadedmetadata', onMeta);
+      };
+      if (video.readyState >= 1) {
+        try { video.currentTime = 0.1; } catch (e) {}
+      } else {
+        video.addEventListener('loadedmetadata', onMeta);
+        video.load();
+      }
+    }
+
+    // Hero background videos
+    (function () {
+      const videos = document.querySelectorAll('.hero-videos video');
+      const playBtn = document.getElementById('heroPlayBtn');
+      if (!videos.length) return;
+
+      let current = 0;
+      const DURATION = 10000;
+
+      const updatePlayBtn = () => {
+        if (!playBtn) return;
+        const active = videos[current];
+        if (active && !active.paused && !active.ended) {
+          playBtn.classList.add('hidden');
+        } else {
+          playBtn.classList.remove('hidden');
+        }
+      };
+
+      videos.forEach(v => {
+        prepareVideo(v);
+        showFirstFrame(v);
+        v.addEventListener('playing', updatePlayBtn);
+        v.addEventListener('pause', updatePlayBtn);
+        v.addEventListener('ended', updatePlayBtn);
+      });
+
+      const playVideo = (index) => {
+        videos.forEach((v, i) => {
+          if (i === index) {
+            v.classList.add('active');
+            forcePlay(v).then(updatePlayBtn);
+          } else {
+            v.classList.remove('active');
+            v.pause();
+          }
+        });
+        updatePlayBtn();
+      };
+
+      playVideo(0);
+      setTimeout(() => playVideo(0), 500);
+      setTimeout(() => playVideo(0), 1500);
+
+      setInterval(() => {
+        current = (current + 1) % videos.length;
+        playVideo(current);
+      }, DURATION);
+
+      videos.forEach((v, i) => {
+        v.addEventListener('ended', () => {
+          if (i === current) {
+            current = (current + 1) % videos.length;
+            playVideo(current);
+          }
+        });
+      });
+
+      if (playBtn) {
+        playBtn.addEventListener('click', () => {
+          forcePlay(videos[current]).then(updatePlayBtn);
+        });
+      }
+    })();
+
+    // Gallery videos
+    (function () {
+      const items = document.querySelectorAll('.gallery-item.is-video');
+
+      items.forEach(item => {
+        const video = item.querySelector('video');
+        if (!video) return;
+
+        prepareVideo(video);
+        showFirstFrame(video);
+
+        video.addEventListener('playing', () => item.classList.add('playing'));
+        video.addEventListener('pause', () => {
+          if (video.paused) item.classList.remove('playing');
+        });
+
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (video.paused) {
+            forcePlay(video).then(() => item.classList.add('playing'));
+          } else {
+            video.pause();
+            item.classList.remove('playing');
+          }
+        });
+      });
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            const item = entry.target;
+            const video = item.querySelector('video');
+            if (!video) return;
+            if (entry.isIntersecting) {
+              forcePlay(video).then(() => {
+                if (!video.paused) item.classList.add('playing');
+              });
+            } else {
+              video.pause();
+              item.classList.remove('playing');
+            }
+          });
+        }, { threshold: 0.35 });
+
+        items.forEach(item => observer.observe(item));
+      } else {
+        items.forEach(item => {
+          const video = item.querySelector('video');
+          forcePlay(video);
+        });
+      }
+
+      const unlockAll = () => {
+        items.forEach(item => {
+          const video = item.querySelector('video');
+          if (video && video.paused) {
+            forcePlay(video).then(() => {
+              if (!video.paused) item.classList.add('playing');
+            });
+          }
+        });
+      };
+      document.addEventListener('touchstart', unlockAll, { once: true, passive: true });
+      document.addEventListener('click', unlockAll, { once: true });
+      document.addEventListener('scroll', unlockAll, { once: true, passive: true });
+    })();
+
+    // Gallery lightbox
+    (function () {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = lightbox.querySelector('img');
+      const closeBtn = lightbox.querySelector('.lightbox-close');
+
+      document.querySelectorAll('.gallery-item:not(.is-video)').forEach(item => {
+        item.addEventListener('click', () => {
+          const src = item.dataset.full || item.querySelector('img')?.src;
+          if (!src) return;
+          lightboxImg.src = src;
+          lightbox.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      const closeLightbox = () => {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        lightboxImg.src = '';
+      };
+
+      closeBtn.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+      });
+    })();
+  </script>
+</body>
+</html>
